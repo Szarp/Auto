@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+<link href="jojo.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+var
+   l=200;
+   r=0.004;
+   rr=0.02;
+   masa=0.1;
+   v_p=0;
+   v_k=0;
+   Last=0;
+   ld=12;
+   yyk=0;
+   xxk=200;
+   xxkd=12
+   yykd=20;
+   yyk=0;
+
+   
+function jojo(id){
+  
+
+yyk=yyk+yykd;
+if(yyk>300){yykd=-20;}
+if(yyk<0){yykd=20;}
+
+  if(xxk>1){xxkd=-10;}
+  if (xxk<0){xxkd=10;}
+  var  d = document.getElementById(id); 
+  d.style.top=yyk+"px";
+  d.style.left=xxk+"px";
+}
+
+function setup(x){
+var y=x+2;
+var z="setup("+y+")";
+setTimeout( z ,50);
+jojo("id0");
+}
+
+function start(){
+Last=new Date();
+var z="setup(0)";
+setTimeout(z,100);
+}
+
+</script>
+</head>
+
+<body >
+
+<div id="mdcontent" style="display:block;">
+  <div id="globA">
+    <div class="glob">
+       <div class="lg0" id="id0"  ><img src="logom7.png"></div>
+    </div>
+  </div>
+</div>
+
+ <div class="video-js-box">
+    <!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody -->
+    <video id="example_video_1" class="video-js" width="640" height="264" controls="controls" preload="auto" poster="mobius-clip.png">
+      <source src="mobius-clip.webm" type='video/webm; codecs="vp8, vorbis"' />
+      <source src="http://invoicer.pl/intro/mobius-clip.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+      <source src="http://invoicer.pl/intro/mobius-clip.ogv" type='video/ogg; codecs="theora, vorbis"' />      
+    </video>
+</div>
+
+
+<div style="display:block;float:left;position:fixed;bottom:0;right:0;"> 
+ <a href="http://invoicer.biz"><img src="intro-invoicer.png"></a>
+ <footer><cite>DarekM@emadar.com</cite> </footer>
+
+</div>
+<script>
+window.onload = start(0);
+</script>
+
+</body>
