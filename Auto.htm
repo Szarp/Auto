@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8'>
-<link href="jojo.css" rel="stylesheet" type="text/css">
+<link href="auto.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript">
 var
@@ -14,24 +14,45 @@ var
    v_k=0;
    Last=0;
    ld=12;
-   yyk=0;
+   yyk=[0,20,150,280,300,400,500];
    xxk=200;
    xxkd=12
-   yykd=20;
-   yyk=0;
+   yyk1=0;
+   yyk2=0;
+   yykd1=150;
+   yykd2=280;
+   yykd=[0,20,20,20,20,20,20];
+   nazwy=['od','id0','id1','id2','id3','id4','id5'];
 
-   
-function jojo(id){
+function przesun(nrid){
+
+
+yyk[nrid]=yyk[nrid]+yykd[nrid];
+if(yyk[nrid]>400){yyk[nrid]=0;}
+if(yyk[nrid]<0){yykd[nrid]=10;}
+
+  if(xxk>1){xxkd=-200;}
+  if (xxk<0){xxkd=10;}
+  var  d = document.getElementById(nazwy[nrid]);
+  d.style.top=yyk[nrid]+"px";
+  d.style.left=xxk+"px";
+}
+
+
   
 
-yyk=yyk+yykd;
-if(yyk>300){yykd=-20;}
-if(yyk<0){yykd=20;}
+
+function jojo2(id){
+
+
+yyk2=yyk2+yykd2;
+if(yyk2>300){yykd2=-200;}
+if(yyk2<0){yykd2=20;}
 
   if(xxk>1){xxkd=-10;}
   if (xxk<0){xxkd=10;}
   var  d = document.getElementById(id); 
-  d.style.top=yyk+"px";
+  d.style.top=yyk2+"px";
   d.style.left=xxk+"px";
 }
 
@@ -39,13 +60,16 @@ function setup(x){
 var y=x+2;
 var z="setup("+y+")";
 setTimeout( z ,50);
-jojo("id0");
+for (i=1;i<7;i++)
+    przesun(i); 
 }
+ 
 
-function start(){
-Last=new Date();
-var z="setup(0)";
-setTimeout(z,100);
+ 
+ function start(){
+  Last=new Date();
+  var z="setup(0)";
+  setTimeout(z,100);
 }
 
 </script>
@@ -56,20 +80,26 @@ setTimeout(z,100);
 <div id="mdcontent" style="display:block;">
   <div id="globA">
     <div class="glob">
-       <div class="lg0" id="id0"  ><img src="logom7.png"></div>
-    </div>
-  </div>
-</div>
-
- <div class="video-js-box">
-    <!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody -->
-    <video id="example_video_1" class="video-js" width="640" height="264" controls="controls" preload="auto" poster="mobius-clip.png">
-      <source src="mobius-clip.webm" type='video/webm; codecs="vp8, vorbis"' />
-      <source src="http://invoicer.pl/intro/mobius-clip.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
-      <source src="http://invoicer.pl/intro/mobius-clip.ogv" type='video/ogg; codecs="theora, vorbis"' />      
-    </video>
-</div>
-
+       <div class="lg0" id="id0"  ><img id="id0img" src="logom7.png"></div>
+	   </div>
+	    <div id="globA">
+    <div class="glob">
+       <div class="lg0" id="id1"  ><img id="id0img" src="logom7.png"></div>
+	   </div>
+	    <div id="globA">
+    <div class="glob">
+       <div class="lg0" id="id2"  ><img id="id0img" src="logom7.png"></div>
+	   </div>
+    <div class="glob">
+       <div class="lg0" id="id3"  ><img id="id0img" src="logom7.png"></div>
+	   </div>
+    <div class="glob">
+       <div class="lg0" id="id4"  ><img id="id0img" src="logom7.png"></div>
+	   </div>
+    <div class="glob">
+       <div class="lg0" id="id5"  ><img id="id0img" src="logom7.png"></div>
+	   </div>
+ 
 
 <div style="display:block;float:left;position:fixed;bottom:0;right:0;"> 
  <a href="http://invoicer.biz"><img src="intro-invoicer.png"></a>
