@@ -14,9 +14,9 @@ var
    v_k=0;
    Last=0;
    ld=12;
-   yyk=[0,20,150,280,300,400,500];
-   xxk=200;
-   xxkd=12
+   yyk=[0,20,150,280,20,150,280];
+   xxlewy=800;
+   xxprawy=1000
    yyk1=0;
    yyk2=0;
    yykd1=150;
@@ -24,6 +24,8 @@ var
    yykd=[0,20,20,20,20,20,20];
    nazwy=['od','id0','id1','id2','id3','id4','id5'];
 
+  
+   
 function przesun(nrid){
 
 
@@ -31,14 +33,34 @@ yyk[nrid]=yyk[nrid]+yykd[nrid];
 if(yyk[nrid]>400){yyk[nrid]=0;}
 if(yyk[nrid]<0){yykd[nrid]=10;}
 
-  if(xxk>1){xxkd=-200;}
-  if (xxk<0){xxkd=10;}
+
   var  d = document.getElementById(nazwy[nrid]);
   d.style.top=yyk[nrid]+"px";
-  d.style.left=xxk+"px";
+  d.style.left=xxlewy+"px";
 }
 
+function przesunlewo() {
+xxlewy=xxlewy+20;
+xxprawy=xxprawy+20;
+}
 
+function przesunprawo() {
+xxlewy=xxlewy-20;
+xxprawy=xxprawy-20;
+}
+
+function przesun2(nrid){
+
+
+yyk[nrid]=yyk[nrid]+yykd[nrid];
+if(yyk[nrid]>400){yyk[nrid]=0;}
+if(yyk[nrid]<0){yykd[nrid]=10;}
+
+
+  var  d = document.getElementById(nazwy[nrid]);
+  d.style.top=yyk[nrid]+"px";
+  d.style.left=xxprawy+"px";
+}
   
 
 
@@ -60,8 +82,10 @@ function setup(x){
 var y=x+2;
 var z="setup("+y+")";
 setTimeout( z ,50);
-for (i=1;i<7;i++)
+for (i=1;i<4;i++)
     przesun(i); 
+for (i=4;i<7;i++)
+	przesun2(i);
 }
  
 
@@ -70,6 +94,11 @@ for (i=1;i<7;i++)
   Last=new Date();
   var z="setup(0)";
   setTimeout(z,100);
+  var element = document . getElementById ( "id7" ) ; //alert('bb');
+  element.addEventListener (     "click",   przesunlewo ) ; //alert('aa');
+  
+  var element = document . getElementById ( "id6" ) ; //alert('bb');
+  element.addEventListener (     "click",   przesunprawo ) ; //alert('aa');
 }
 
 </script>
@@ -99,13 +128,13 @@ for (i=1;i<7;i++)
     <div class="glob">
        <div class="lg0" id="id5"  ><img id="id0img" src="logom7.png"></div>
 	   </div>
- 
-
-<div style="display:block;float:left;position:fixed;bottom:0;right:0;"> 
- <a href="http://invoicer.biz"><img src="intro-invoicer.png"></a>
- <footer><cite>DarekM@emadar.com</cite> </footer>
-
-</div>
+	    <div id="globA">
+    <div class="glob">
+       <div  id="id6" style="left:600px;" ><img  src="owoc.png"></div>
+   <div id="globA">
+    <div class="glob">
+       <div  id="id7"  style="left:1300px;"><img  src="owoc.png"></div>
+<
 <script>
 window.onload = start(0);
 </script>
