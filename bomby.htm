@@ -1,215 +1,370 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <meta charset='utf-8'>
 <link href="bomby.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript">
+
 var
-  
-   yyk=[0,50,200,300,50,200,300,50,200,200,200,];
-   yykd=[0,20,20,20,20,20,20,20,20,20,20];
-   
-   ld=12;
-   xxlewy2=300;
-   xxprawy2=350;
-   xxskret=5;
-   xxjablko=800;
-   xxjablko2=800;
-   
-   nazwy=['od','id0','id1','id2','id3','id4','id5','id8','id9','id10'];
-function przesun(nrid){
+   yyk=[0,50,200,300,50,200,300,50,200,300,50,200,300,50,200,300];
+   yykd=[0,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20];
+   xxk=[0,100,100,100,200,200,200,300,300,300,400,400,400,500,500,500];
+   xxjablko=200;
+   xxjablko2=0;
+   idimg=['od','id0img','id1img','id2img','id3img','id4img','id5img','id8img','id9img','id10img','id14img',
+   'id12img','id13img'];
+   nazwy=['od','id0','id1','id2','id3','id4','id5','id8','id9','id10','id11','id12','id13',
+   'id14','id15','id16'];
+   id11img=0;
+   liczby=0;
+   sekundy=0;
+   minuty=0;
+   mmsec=0;
+   dzemka=0;
+   buzikenable=0;
+   myszkaY=0;
+   myszkaX=0;
+   nacisniete=0;
+   stoperstart=0;
+   rekordy=0;
+   tablicarekordow=['rekord1','rekord2','rekord3']
 
-
-yyk[nrid]=yyk[nrid]+yykd[nrid];
-var  d = document.getElementById(nazwy[nrid]);
-if(yyk[nrid]>400){yyk[nrid]=0;
-
-
- wylacz(d);
+   function cykl(x){
+  var y=x+2;
+  var z="cykl("+y+")";
+  setTimeout( z ,100);
+  for (i=1;i<16;i++)
+    {bomby(i); przyspiesz(i);}
+  kropkimruganie();
+  buzik();
+if(stoperstart==1){stoper();}  
+}
+function wznow(){
+if(stoperstart==1){stoperstart=2;}
+else {stoperstart=1;}
+console.log(stoperstart);
+}
+function wyzeruj(){
+if (stoperstart==2){liczby=0;
+   sekundy=0;
+   minuty=0;
+   mmsec=0;
+   buzikenable=0;}
+   console.log(mmsec);
+   wypiszStoper();
+}
+function wypisznowyrekord(){
 
 
 }
-if(yyk[nrid]<0){yykd[nrid]=10;}
 
+  function wylacz(d){
+	var x=Math.random();
+	if(x>0.15){d.style.display="none";}
+	else{d.style.display="block";}
+	}
+function kropkimruganie (){
+var c= document.getElementById("dwukropek");
+if(mmsec<5){c.style.color="red";}
+else{c.style.color="white";}
+}
+ function buzik(){
+   if (minuty>dzemka){alarm(1);}
+   if (minuty==dzemka){
+     if (buzikenable==1){alarm(0);}
+   }
+ }
+ function alarm(enable){
+	buzikenable=enable;
+	dzemka=dzemka+2;
+	var c= document.getElementById("napisdzemka");
+	var d= document.getElementById("stop");
+	if(enable==1){d.style.display="block";}
+	else{d.style.display="none";c.style.display="none";}
+ }
  
-  
-  d.style.top=yyk[nrid]+"px";
-  d.style.left="100px";
+ function dzemkaplus() {
+ dzemka=dzemka+2;
+ var d= document.getElementById("stop");
+ d.style.display="none";
+ var c= document.getElementById("napisdzemka");
+ c.style.display="block";
+ }
+ function stoper(){
+	mmsec=mmsec+1;
+	var d= document.getElementById("mmsec");
+		if(mmsec>9){minsec2();mmsec=0;}	
+	}
+function minsec (){
+	minuty=minuty+1;
+	wypiszStoper();
+	
+	}
+
+  function minsec2 (){
+	sekundy=sekundy+1;
+	wypiszStoper();
+	
+	if (sekundy>2){sekundy=0;minsec();odtworz();}
+	}
+function liczenie (nrid){
+	liczby=liczby+1;
+	wypiszStoper();
+   
+	}
+	
+function wypiszStoper (){
+var wynik= 	document.getElementById("wynik");
+   wynik.innerHTML=liczby;
+var d= document.getElementById("sec");
+	d.innerHTML=sekundy;
+	var d= document.getElementById("min");
+	d.innerHTML=minuty;
 }
-
-function wylacz(d){
-var x=Math.random();
-if(x>0.5){d.style.display="none";}
-else{d.style.display="block";}
-
-}
-
-function przesunprawy(nrid){
-
-
-yyk[nrid]=yyk[nrid]+yykd[nrid];
-  //console.log(xxprawy[nrid]);
- var  d = document.getElementById(nazwy[nrid]);
-
-  if(yyk[nrid]>400){
-    yyk[nrid]=0;
-    wylacz(d);
-  }
-  if(yyk[nrid]<0){yykd[nrid]=10;}
-  d.style.top=yyk[nrid]+"px";
-  d.style.left="200px";
-}
-
-function przesun3(nrid){
+ function bomby (nrid){
+	yyk[nrid]=yyk[nrid]+yykd[nrid];
+	var  d = document.getElementById(nazwy[nrid]);
+	var dimg=document.getElementById('id11img');
+		if(yyk[nrid]>400){
+			if (d.style.display=="block"){
+				if (xxjablko==xxk[nrid]){
+					dimg.src="przecietejablko.png";
+				}
+				if  (xxjablko!=xxk[nrid]){
+					dimg.src="jablko.png";
+					liczenie();
+				}   
+			}
+			yyk[nrid]=0;
+			wylacz(d);
+		}
+		d.style.top=yyk[nrid]+"px";
+		d.style.left=xxk[nrid]+"px";
+	}
+//----------------------------------------------------------------------------------------
+ 
 
 
-  yyk[nrid]=yyk[nrid]+yykd[nrid];
-  //console.log(xxprawy[nrid]);
+function przyspiesz (nrid){
 var  d = document.getElementById(nazwy[nrid]);
-if(yyk[nrid]>400){yyk[nrid]=0;
- wylacz(d);
-}
-if(yyk[nrid]<0){yykd[nrid]=10;}
-
-
-  
-  d.style.top=yyk[nrid]+"px";
-  d.style.left="300px";
-}
-function przesowanie() {
-
-xxlewy2=xxlewy2+xxskret;
-xxprawy2=xxprawy2+xxskret;
-  //console.log(xxlewy2+'   '+xxprawy2);
-	if (xxlewy2>500){xxskret=-5;}
-	if (xxlewy2<200){xxskret=+5;}
+//if ( ){yykd[nrid]=70;}
 }
 
+function wlewoId8(){ wlewo("idjablko");}
+function wprawoId8(){ lewypowrot("idjablko");}
 
+function wlewoId82(){ wprawo("idjablko");}
+function wprawoId82(){ prawypowrot("idjablko");}
 
-function wlewoId8(){ wlewo("id11");}
+function lewypowrot(id){
 
-function wprawoId8(){ wprawo("id11");}
-
-function wprawo(id){
-//console.log(id);
-xxjablko=xxjablko+ld;
-xxjablko=200;
+if (xxjablko>99){xxjablko=200;}
 var  d = document.getElementById(id);
 d.style.left=xxjablko+"px";
 }
 
 function wlewo(id){
-  //console.log(id);
-  xxjablko=xxjablko+ld;
-  xxjablko=100;
-  var  d = document.getElementById(id);
-  d.style.left=xxjablko+"px";
-}
 
-
-
-function wlewoId82(){ wlewo2("id11");}
-
-function wprawoId82(){ wprawo2("id11");}
-
-function wprawo2(id){
-//console.log(id);
-xxjablko2=xxjablko2+ld;
-xxjablko2=200;
+if (xxjablko>100) {xxjablko=100;}
 var  d = document.getElementById(id);
-d.style.left=xxjablko2+"px";
+d.style.left=xxjablko+"px";
+}
+function myszkadown(event){
+  //console.log('myszkadown');
+  nacisniete=4;
+  //console.log(nacisniete);
+  myszkaY=event.clientY;
+  myszkaX=event.clientX;
+}
+function myszkaup(event){
+  //console.log('myszkaup ',event);
+  nacisniete=2;
+  console.log(nacisniete);
+  
+}
+function myszkamove(event){
+if (nacisniete>3){
+var d = document.getElementById( "myszka" );
+ //console.log('myszkamove ',event)
+d.style.top=(event.clientY-195)+"px";
+d.style.left=(event.clientX-70)+"px";
 }
 
-function wlewo2(id){
-//onsole.log(id);
-xxjablko2=xxjablko2+ld;
-xxjablko2=300;
+  //console.log('myszkamove ',event)
+}
+
+
+function wprawo(id){
+
+if (xxjablko>299) {xxjablko=200;}
 var  d = document.getElementById(id);
-d.style.left=xxjablko2+"px";
+d.style.left=xxjablko+"px";
 }
-//file:///D:/git/Auto/owoc.png
 
-function cykl(x){
-  var y=x+2;
-  var z="cykl("+y+")";
-  setTimeout( z ,50);
-  for (i=1;i<4;i++)
-    przesun(i); 
-  for (i=4;i<7;i++)
-	przesunprawy(i);
-	for (i=7;i<10;i++)
-	przesun3(i);
-  przesowanie();
-	
+function prawypowrot(id){
+
+if (xxjablko>199) {xxjablko=300;}
+var  d = document.getElementById(id);
+d.style.left=xxjablko+"px";
 }
- 
 
-	  
- 
+function odtworz (){
+var a = document.querySelector('audio');
+	 a.play();
+ }
  function start(){
   Last=new Date();
   var z="cykl(0)";
-  setTimeout(z,100);
-  var element = document.getElementById( "id6" );
+  setTimeout(z,50);
+  var element = document.getElementById( "idlewo" );
   element.addEventListener("mousedown",wlewoId8);
-  
-   var element = document.getElementById( "id6" );
   element.addEventListener("mouseup",wprawoId8);
   
-  var element = document.getElementById( "id7" );
-  element.addEventListener("mousedown",wlewoId82);
+  var element = document.getElementById( "idprawo" );
+  element.addEventListener("mouseup",wlewoId82);
+  element.addEventListener("mousedown",wprawoId82);
+  //---------------------------------------------//
+  var element = document.getElementById( "stop" );
+  element.addEventListener("click",dzemkaplus);
+  //------------------------------------------//
+  var element = document.getElementById( "myszka" );
+  element.addEventListener("mousedown",myszkadown);
+  element.addEventListener("mouseup",myszkaup);
+  element.addEventListener("mousemove",myszkamove);
+  //--------------------------------------------//
   
-   var element = document.getElementById( "id7" );
-  element.addEventListener("mouseup",wprawoId82);
+  var element = document.getElementById( "przywznow" );
+  element.addEventListener("click",wznow);
+  
+  var element = document.getElementById( "przywyzeruj" );
+  element.addEventListener("click",wyzeruj);
  }
 
 </script>
 </head>
 
 <body >
-
+<audio>
+    <source src="jingle.mp3" type="audio/mp3"></source>
+	 <source src="jingle.ogg" type="audio/ogg"></source>
+  </audio>
 <div id="mdcontent" style="display:block;">
+<p id="wynik" >0</p>
+<span id="min" >0</span>
+<span id="dwukropek" >:</span>
+<span id="sec" >0</span>
+<p id="mmsec" ></p>
+
+<p id="napisdzemka" >dzemka</p>
+
+
+
+<style>
+.napis p{margin:0;text-align:center;margin-top:8px;}
+</style>
+
+<div style="background-color:#000000;">   
+
+
+<style>
+.napis2 p{margin:0;margin-left:20px;margin-top:10px;}
+</style>
+  
+<div class="napis2" style="color:red;font-size:25px;" >
+	Rycerze ognia:
+	-sojusz który zapewnia miłą atmosferę,
+	-jest wstanie pomóc w każdej potrzebie,
+	-każdy jest tu mile widziany.
+
+</div>
+</div></div><br>
+
+
+
   <div id="globA">
+  
+      <div class="lg0" id="stop" style= "display:none;" >
+	   <div style="border: 1px solid blue; padding:20px;" >
+	   <p> budzik</p>
+	   <img id="id1img" src="logom7.png"></div>
+	   </div>
+
+  
+       <div  id="rekord1"  >0.00</div>
+	   <div  id="rekord2"  >0.00</div>
+	   <div  id="rekord3"  >0.00</div>
+	</div>
     <div class="glob">
        <div class="lg0" id="id0"  ><img id="id0img" src="logom7.png"></div>
 	   </div>
-	    <div id="globA">
-    <div class="glob">
-       <div class="lg0" id="id1"  ><img id="id0img" src="logom7.png"></div>
+	   <div class="glob">
 	   </div>
 	    <div id="globA">
     <div class="glob">
-       <div class="lg0" id="id2"  ><img id="id0img" src="logom7.png"></div>
+       <div class="lg0" id="id1"  ><img id="id1img" src="logom7.png"></div>
+	   </div>
+	    <div id="globA">
+    <div class="glob">
+       <div class="lg0" id="id2"  ><img id="id2img" src="logom7.png"></div>
 	   </div>
     <div class="glob">
-       <div class="lg0" id="id3"  ><img id="id0img" src="logom7.png"></div>
+       <div class="lg0" id="id3"  ><img id="id3img" src="logom7.png"></div>
 	   </div>
     <div class="glob">
-       <div class="lg0" id="id4"  ><img id="id0img" src="logom7.png"></div>
+       <div class="lg0" id="id4"  ><img id="id4img" src="logom7.png"></div>
 	   </div>
     <div class="glob">
-       <div class="lg0" id="id5"  ><img id="id0img" src="logom7.png"></div>
+       <div class="lg0" id="id5"  ><img id="id5img" src="logom7.png"></div>
 	   </div>
     <div class="glob">
-       <div  id="id6" style="left:0px;top:400px;" ><img  src="owoc.png"></div>
+       <div  id="idlewo" style="left:0px;top:400px;" ><img  src="owoc.png"></div>
    </div>
     <div class="glob">
-       <div  id="id7"  style="left:400px;top:400px;"><img  src="owoc.png"></div>
-	   </div>
+       <div  id="idprawo"  style="left:400px;top:400px;"><img  src="owoc.png"></div>
+	   </div>  
     <div class="glob">
-       <div  id="id8" ><img  src="logom7.png"></div>
+       <div  id="id8" ><img id="id8img" src="logom7.png"></div>
 		</div>
     <div class="glob">
-       <div  id="id9"  ><img  src="logom7.png"></div>
+       <div  id="id9"  ><img id="id9img"  src="logom7.png"></div>
    </div>
     <div class="glob">
-       <div  id="id10"  ><img  src="logom7.png"></div>
+       <div  id="id10"  ><img id="id10img" src="logom7.png"></div>
+	</div>
+   <div class="glob">
+       <div  id="id11"  ><img id="id14img" src="logom7.png"></div>
+	</div>
+	  <div class="glob">
+       <div  id="id12"  ><img id="id12img" src="logom7.png"></div>
+	  </div>
+	  <div class="glob">
+       <div  id="id13"  ><img id="id13img" src="logom7.png"></div>
+	  </div>
+	  <div class="glob">
+       <div  id="id14"  ><img id="id15img" src="logom7.png"></div>
+	</div>
+	<div class="glob">
+       <div  id="id15"  ><img id="id16img" src="logom7.png"></div>
+	</div>
+	<div class="glob">
+       <div  id="id16"  ><img id="id17img" src="logom7.png"></div>
+	</div>
+	   <div class="glob">
+       <div  id="idjablko"  style="left:200px;top:400px;" ><img id="id11img" src="jablko.png"></div>
 	  </div>
 	   <div class="glob">
-       <div  id="id11" style="left:200px;top:400px;" ><img  src="jablko.png"></div>
+       <div  id="myszka" ><img id="myszkaimg" src="jablko.png"></div>
 	  </div>
+	  <div class="glob">
+       <div class="lg0" id="przywznow"  style="left:600px;top:400px;"><img src="logom7.png"></div>
+	   </div><div class="glob">
+       <div class="lg0" id="przyzatrzymaj"  style="left:700px;top:400px;"><img src="owoc.png"></div>
+	   </div><div class="glob">
+       <div class="lg0" id="przywyzeruj"  style="left:800px;top:400px;"><img src="jablko.png"></div>
+	   </div>
+	   <div class="glob">
+   
 	  
 <script>
 window.onload = start(0);
